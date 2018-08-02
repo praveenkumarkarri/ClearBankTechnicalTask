@@ -1,33 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using NUnit.Framework;
+using DeckCardProject.ModuleClasses;
+using RestSharp;
 
 namespace DeckCardProject.Steps
 {
     [Binding]
     class DeckCardSteps
     {
+        DeckCardRequests deck_request;
+
         [Test]
         [Given(@"I create the new deck")]
         public void GivenICreateTheNewDeck()
         {
-            ScenarioContext.Current.Pending();
+            deck_request = new DeckCardRequests();
+            var response = deck_request.CreateNewDeck();
+            Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
         }
 
         [When(@"I draw the cards (.*) times from the deck")]
-        public void WhenIDrawTheCardsTimesFromTheDeck(int p0)
+        public void WhenIDrawTheCardsTimesFromTheDeck(int no_of_times)
         {
-            ScenarioContext.Current.Pending();
+            deck_request.DrawCardsForGivenTimes(Method.GET, no_of_times);
         }
 
         [Then(@"the remaining cards count of the deck is accurate")]
         public void ThenTheRemainingCardsCountOfTheDeckIsAccurate()
         {
-            ScenarioContext.Current.Pending();
+            Assert.IsTrue(deck_request.IsRemainingCardsCorrect(), "Remaining deck cards count returned is not correct");
         }
 
     }

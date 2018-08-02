@@ -22,7 +22,9 @@ namespace DeckCardProject.ModuleClasses
             client = new RestClient(Configuration.BaseURL + Configuration.RelativeURL);
         }
 
-        public IRestResponse createNewDeck()
+        /*This metthod creates the neew deck by calling the 
+        api and fetch the deck id*/
+        public IRestResponse CreateNewDeck()
         {
             request = new RestRequest();
             request.Resource = "new/";
@@ -33,7 +35,8 @@ namespace DeckCardProject.ModuleClasses
             return response;
         }
 
-        public void drawCardsForGivenTimes(Method method, int no_of_times)
+        //This method draws the [1-5] cards for given number of times
+        public void DrawCardsForGivenTimes(Method method, int no_of_times)
         {
             int cards_counter = 52;
             int count = 1;
@@ -54,7 +57,10 @@ namespace DeckCardProject.ModuleClasses
 
         }
 
-        public IRestResponse getRemainingCardsResponse(Method method)
+        /*This meethod gets the remaining no of cards count
+         When the count is sent as 0, we can get the remaining no of decks
+         without drawing any cards*/
+        public IRestResponse GetRemainingCardsResponse(Method method)
         {
             request = new RestRequest("{deck_id}/draw/?count=0");
             request.Method = method;
@@ -62,9 +68,11 @@ namespace DeckCardProject.ModuleClasses
             return client.Execute(request);
         }
 
-        public bool isRemainingCardsCorrect()
+        /*Checks if the expectd cards remaining equals to the one that backend
+        has sent*/
+        public bool IsRemainingCardsCorrect()
         {
-            var response = getRemainingCardsResponse(Method.GET);
+            var response = GetRemainingCardsResponse(Method.GET);
             var response_json = JsonConvert.DeserializeObject<DrawCardsJson>(response.Content);
             return response_json.remaining == no_cards_remaining;
         }
