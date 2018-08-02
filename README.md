@@ -4,8 +4,9 @@ Clear Bank technical task repository
 
 # Instructions to run the test:
 
-## Pre-requisites:
+## Prerequisites:
 
+* Visual Studio 2017 
 * NUnit framework: 
 	_You need to add nunit.framework dll to the project references using NuGet package manager_
 * Specflow:
