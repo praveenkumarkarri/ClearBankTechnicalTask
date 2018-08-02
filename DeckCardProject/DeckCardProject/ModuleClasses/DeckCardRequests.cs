@@ -22,7 +22,7 @@ namespace DeckCardProject.ModuleClasses
             client = new RestClient(Configuration.BaseURL + Configuration.RelativeURL);
         }
 
-        /*This metthod creates the neew deck by calling the 
+        /*This method creates the new deck by calling the 
         api and fetch the deck id*/
         public IRestResponse CreateNewDeck()
         {
@@ -57,7 +57,7 @@ namespace DeckCardProject.ModuleClasses
 
         }
 
-        /*This meethod gets the remaining no of cards count
+        /*This method gets the remaining no of cards count
          When the count is sent as 0, we can get the remaining no of decks
          without drawing any cards*/
         public IRestResponse GetRemainingCardsResponse(Method method)
